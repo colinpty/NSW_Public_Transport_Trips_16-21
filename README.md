@@ -55,10 +55,9 @@ from cte_before
 FULL join cte_covid on cte_covid.pick_year = cte_before.pick_year;
 ```
 
-### How did covid impact passenger numbers public transport?
-
-
-
+### What were the busiest months for NSW Buses from 2016 to 2021?
+The code i created adds all the trips per month in order from busiest to the quietest month. 
+Results show March was the busiest month while April was the quietest month to travel on NSW Buses. 
 
 | Months |  Trips    |
 |--------|:---------:|
@@ -74,3 +73,17 @@ FULL join cte_covid on cte_covid.pick_year = cte_before.pick_year;
 | 6.0	 | 96682791  |
 | 1.0	 | 96065270  |
 | 4.0	 | 89206193  |
+
+```SELECT
+    EXTRACT(MONTH FROM transport_month) months,
+    SUM (bus) as trips
+FROM
+    transport_modes
+GROUP BY
+    months
+ORDER BY
+    trips DESC;
+```
+
+
+
