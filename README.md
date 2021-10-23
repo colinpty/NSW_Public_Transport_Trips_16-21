@@ -34,7 +34,8 @@ Results show the Ferry service had the biggest drop during covid with 56.39% les
 
 
 
-``` WITH cte_before AS (
+``` 
+WITH cte_before AS (
 SELECT 
 CAST(EXTRACT(YEAR FROM transport_month) AS INTEGER) as pick_year, SUM(bus) as old_Bus, SUM(ferry) as old_Ferry, SUM(train) as old_Train
 FROM transport_modes
@@ -74,15 +75,11 @@ Results show March was the busiest month while April was the quietest month to t
 | 1.0	 | 96065270  |
 | 4.0	 | 89206193  |
 
-```SELECT
-    EXTRACT(MONTH FROM transport_month) months,
-    SUM (bus) as trips
-FROM
-    transport_modes
-GROUP BY
-    months
-ORDER BY
-    trips DESC;
+```
+SELECT EXTRACT(MONTH FROM transport_month) months, SUM (bus) as trips
+FROM transport_modes
+GROUP BY months
+ORDER BY trips DESC;
 ```
 
 
