@@ -97,5 +97,21 @@ WITH cte_peak_month AS (
                             from cte_peak_month
                             where train_trips = (select max(train_trips)  from cte_peak_month);
 ```
-
+### Can you create a function that finds the specific amount of Ferry trips for that particular month?
+```
+create or replace function get_trips_count(transport_date date)
+    returns table (
+        	ferry_trips_total int
+    ) 
+    language plpgsql
+as $$
+	begin
+	    return query 
+	    select ferry from transport_modes
+	    where transport_month = transport_date;
+	end;
+$$;
+```
+`select get_trips_count ('2021-03-01');
+`
 
