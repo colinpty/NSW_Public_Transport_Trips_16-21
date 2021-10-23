@@ -8,7 +8,7 @@ Thanks to NSW Government for publishing the data in public and allowing us to qu
 ## How to Install
 
 1. Create a new blank database in Postgres.  
-	`CREATE DATABASE nsw_transport;`. 
+	`CREATE DATABASE nsw_transport;`
 
 2. Run the code in the **CREATE_TABLE.sql** file to create the table in the database.
 
@@ -54,3 +54,23 @@ select  round((SUM(old_Bus) - SUM(covid_Bus)) / SUM(old_Bus) * 100, 2) as Bus,
 from cte_before
 FULL join cte_covid on cte_covid.pick_year = cte_before.pick_year;
 ```
+
+### How did covid impact passenger numbers public transport?
+
+
+
+
+| Months |  Trips    |
+|--------|:---------:|
+| 3.0	 | 118837705 |
+| 11.0	 | 117802749 |
+| 8.0	 | 117792589 |
+| 10.0	 | 113467188 |
+| 2.0	 | 112234587 |
+| 7.0	 | 110433013 |
+| 9.0	 | 109928871 |
+| 5.0	 | 107127168 |
+| 12.0	 | 100960483 |
+| 6.0	 | 96682791  |
+| 1.0	 | 96065270  |
+| 4.0	 | 89206193  |
