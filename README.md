@@ -138,3 +138,10 @@ LANGUAGE plpgsql;
 | get_trips_count | 
 |-----------------|
 | 17765453	  | 
+
+
+***
+
+Thanks to NSW Government for publishing the data in public and allowing us to query the data.
+
+
