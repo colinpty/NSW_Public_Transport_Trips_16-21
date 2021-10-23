@@ -2,9 +2,6 @@
 
 The database counts real every passenger trips that occured for each mode of public transport within the state of New South Wales (NSW, Australia) per month and per year from July 2016 to July 2021.
 
-Thanks to NSW Government for publishing the data in public and allowing us to query the data. 
-
-
 ## How to Install
 
 1. Create a new blank database in Postgres.  
