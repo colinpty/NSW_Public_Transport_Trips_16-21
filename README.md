@@ -98,6 +98,7 @@ WITH cte_peak_month AS (
                             where train_trips = (select max(train_trips)  from cte_peak_month);
 ```
 ### Can you create a function that finds the specific amount of Ferry trips for that particular month?
+The select statement below uses the function to show 609,963 passengers travelled in March 2021.
 ```
 create or replace function get_trips_count(transport_date date)
     returns table (
@@ -117,5 +118,26 @@ $$;
 | get_trips_count | 
 |-----------------|
 | 609963	  | 
-
-
+### Can you create a function that selects a mode of transport and finds passenger trips for a particular month?
+The select statement below uses the function to show 17,765,453 passengers travelled on NSW Trains in February 2021.
+```
+CREATE OR REPLACE FUNCTION get_trips_count(transport_date date, p_column text) 
+  RETURNS INT 
+AS
+$$
+declare 
+  l_result INT;
+	begin
+	  execute format('SELECT %I FROM transport_modes WHERE transport_month = $1', p_column) 
+	     using transport_date
+	     into l_result;
+	  return l_result;
+	end;     
+$$
+LANGUAGE plpgsql;
+```
+`select get_trips_count ('2021-02-01', 'train');
+`
+| get_trips_count | 
+|-----------------|
+| 17765453	  | 
