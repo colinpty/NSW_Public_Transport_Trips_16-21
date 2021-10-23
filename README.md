@@ -1,6 +1,6 @@
 # NSW Public Transport Passenger Trips 2016-2021
 
-The database counts real every passenger trips that occured for each mode of public transport within the state of New South Wales (NSW), Australia per month and per year from July 2016 to July 2021.
+The database counts real every passenger trips that occured for each mode of public transport within the state of New South Wales (NSW, Australia) per month and per year from July 2016 to July 2021.
 
 Thanks to NSW Government for publishing the data in public and allowing us to query the data. 
 
@@ -56,9 +56,16 @@ from cte_before
 FULL join cte_covid on cte_covid.pick_year = cte_before.pick_year;
 ```
 
-### What were the busiest months for NSW Buses from 2016 to 2021?
+### What were the busiest months of the year for NSW Buses from 2016 to 2021?
 The code i created adds all the trips per month in order from busiest to the quietest month. 
 Results show March was the busiest month while April was the quietest month to travel on NSW Buses. 
+
+```
+SELECT EXTRACT(MONTH FROM transport_month) months, SUM (bus) as trips
+FROM transport_modes
+GROUP BY months
+ORDER BY trips DESC;
+```
 
 | Months |  Trips    |
 |--------|:---------:|
@@ -75,12 +82,20 @@ Results show March was the busiest month while April was the quietest month to t
 | 1.0	 | 96065270  |
 | 4.0	 | 89206193  |
 
-```
-SELECT EXTRACT(MONTH FROM transport_month) months, SUM (bus) as trips
-FROM transport_modes
-GROUP BY months
-ORDER BY trips DESC;
-```
+### What would be the peak month for NSW Trains from 2016 to 2021?
+The CTE that i created shows August would be considered the peak month for NSW Trains with 151,706,197 passenger trips. 
+| peak_month |  train_trips    |
+|------------|:---------------:|
+| 8.0	     | 151706197       |
 
+```
+WITH cte_peak_month AS (
+                SELECT EXTRACT(MONTH FROM transport_month) peak_month, SUM (train) as train_trips
+                FROM transport_modes
+                GROUP BY peak_month)
+                            SELECT peak_month, train_trips
+                            from cte_peak_month
+                            where train_trips = (select max(train_trips)  from cte_peak_month);
+```
 
 
